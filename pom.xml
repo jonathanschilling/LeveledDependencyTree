@@ -1,0 +1,93 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>de.labathome</groupId>
+		<artifactId>de-labathome-parent</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	
+	<groupId>de.labathome</groupId>
+	<artifactId>LeveledDependencyTree</artifactId>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
+	
+	<name>LeveledDependencyTree</name>
+	<description>An implementation of leveled dependency trees</description>
+	
+	<url>${jonathanschilling.git.url}${project.name}</url>
+	<scm>
+		<connection>${jonathanschilling.git.root}${project.name}.git</connection>
+		<developerConnection>${jonathanschilling.git.root}${project.name}.git</developerConnection>
+		<url>${jonathanschilling.git.url}${project.name}/tree/master</url>
+	</scm>
+	<issueManagement>
+		<url>${jonathanschilling.git.url}${project.name}/issues</url>
+		<system>GitLab Issues</system>
+	</issueManagement>
+	
+	<properties>
+		<maven.version>3.6.3</maven.version>
+		<maven.resolver.version>1.4.2</maven.resolver.version>
+	</properties>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-model</artifactId>
+			<version>${maven.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-plugin-api</artifactId>
+			<version>${maven.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-core</artifactId>
+			<version>${maven.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-resolver-provider</artifactId>
+			<version>${maven.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.resolver</groupId>
+			<artifactId>maven-resolver-connector-basic</artifactId>
+			<version>${maven.resolver.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.resolver</groupId>
+			<artifactId>maven-resolver-transport-file</artifactId>
+			<version>${maven.resolver.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.resolver</groupId>
+			<artifactId>maven-resolver-transport-http</artifactId>
+			<version>${maven.resolver.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.resolver</groupId>
+			<artifactId>maven-resolver-transport-wagon</artifactId>
+			<version>${maven.resolver.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.shared</groupId>
+			<artifactId>maven-invoker</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>seed.json</groupId>
+			<artifactId>java-json</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.6</version>
+		</dependency>
+	</dependencies>
+</project>
