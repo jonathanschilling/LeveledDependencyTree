@@ -1,4 +1,4 @@
-# LeveledDependecyTree
+# LeveledDependencyTree
 
 This repository contains a Java implementation of a transform of a general list of objects
 depending onto another (and possibly other objects outside the scope you want to consider)
