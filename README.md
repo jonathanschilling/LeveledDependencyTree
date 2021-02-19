@@ -63,7 +63,7 @@ and finally, the `all` artifact can be built.
 
 ### Grouping of (Java) classes into subprojects
 The [Xj3D](https://sourceforge.net/projects/xj3d/) framework is a big Java project, consisting of several thousands(?) of classes
-which are currently hosted as a single source tree on [SourceForge](https://sourceforge.net/p/xj3d/code/HEAD/tree/trunk/).
+which are currently hosted as a [monolithic source tree on SourceForge](https://sourceforge.net/p/xj3d/code/HEAD/tree/trunk/).
 Splitting this project up into seveval subproject would allow more fine-grained development
 and is [actually considered by the project team](https://www.web3d.org/wiki/index.php/Xj3D_Evolution#Maven).
 Using a leveled dependecy tree, the Xj3D classes could be split up into several Maven artifacts in an orderly manner.
