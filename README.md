@@ -30,3 +30,43 @@ so you can parallelize the work required for updating a given level.
 
 An example program to print the level structure for the [`netlib-java`](https://github.com/fommil/netlib-java) artifact is provided
 as [`MavenExample.java`](https://github.com/jonathanschilling/LeveledDependencyTree/blob/master/src/test/java/de/labathome/ldt/examples/maven/MavenExample.java) in this repository.
+The output looks as follows:
+
+```
+level 1
+  com.github.fommil.netlib:core
+  com.github.fommil:jniloader
+level 2
+  com.github.fommil.netlib:native_ref-java
+  com.github.fommil.netlib:native_system-java
+level 3
+  com.github.fommil.netlib:netlib-native_ref-osx-x86_64
+  com.github.fommil.netlib:netlib-native_ref-linux-x86_64
+  com.github.fommil.netlib:netlib-native_ref-linux-i686
+  com.github.fommil.netlib:netlib-native_ref-win-x86_64
+  com.github.fommil.netlib:netlib-native_ref-win-i686
+  com.github.fommil.netlib:netlib-native_ref-linux-armhf
+  com.github.fommil.netlib:netlib-native_system-osx-x86_64
+  com.github.fommil.netlib:netlib-native_system-linux-x86_64
+  com.github.fommil.netlib:netlib-native_system-linux-i686
+  com.github.fommil.netlib:netlib-native_system-linux-armhf
+  com.github.fommil.netlib:netlib-native_system-win-x86_64
+  com.github.fommil.netlib:netlib-native_system-win-i686
+level 4
+  com.github.fommil.netlib:all
+```
+
+Note that only artifacts, whose Maven coordinates start with `com.githib.fommil` are included via the `inTree()` predicate.
+When updating this project, you need to start with the artifacts `core` and `jniloader` before you can progress
+to `native_*-java`. Once these are done, you can go on with the `netlib-native_*-*` artifacts
+and finally, the `all` artifact can be built.
+
+### Grouping of (Java) classes into subprojects
+The [Xj3D](https://sourceforge.net/projects/xj3d/) framework is a big Java project, consisting of several thousands(?) of classes
+which are currently hosted as a single source tree on [SourceForge](https://sourceforge.net/p/xj3d/code/HEAD/tree/trunk/).
+Splitting this project up into seveval subproject would allow more fine-grained development
+and is [actually considered by the project team](https://www.web3d.org/wiki/index.php/Xj3D_Evolution#Maven).
+Using a leveled dependecy tree, the Xj3D classes could be split up into several Maven artifacts in an orderly manner.
+
+
+
