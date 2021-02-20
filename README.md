@@ -60,10 +60,12 @@ level 4
   com.github.fommil.netlib:all:pom:1.1.2
 ```
 
-Note that only artifacts, whose Maven coordinates start with `com.githib.fommil` are included via the `inTree()` predicate.
 When updating this project, you need to start with the artifacts `core` and `jniloader` before you can progress
 to `native_*-java`. Once these are done, you can go on with the `netlib-native_*-*` artifacts
 and finally, the `all` artifact can be built.
+
+The corresponding dot graph is here:
+![dot graph of netlib-java LDT](https://github.com/jonathanschilling/LeveledDependencyTree/blob/master/doc/dot_ldt.png "dot graph of netlib-java LDT")
 
 ### Grouping of (Java) classes into subprojects
 The [Xj3D](https://sourceforge.net/projects/xj3d/) framework is a big Java project, consisting of several thousands(?) of classes
