@@ -33,27 +33,31 @@ as [`MavenExample.java`](https://github.com/jonathanschilling/LeveledDependencyT
 The output looks as follows:
 
 ```
+out-of-tree dependencies:
+  net.sourceforge.f2j:arpack_combined_all:jar:0.1
+  junit:junit:jar:4.11
+  org.projectlombok:lombok:jar:1.12.2
 level 1
-  com.github.fommil.netlib:core
-  com.github.fommil:jniloader
+  com.github.fommil.netlib:core:jar:1.1.2
+  com.github.fommil:jniloader:jar:1.1
 level 2
-  com.github.fommil.netlib:native_ref-java
-  com.github.fommil.netlib:native_system-java
+  com.github.fommil.netlib:native_ref-java:jar:1.1
+  com.github.fommil.netlib:native_system-java:jar:1.1
 level 3
-  com.github.fommil.netlib:netlib-native_ref-osx-x86_64
-  com.github.fommil.netlib:netlib-native_ref-linux-x86_64
-  com.github.fommil.netlib:netlib-native_ref-linux-i686
-  com.github.fommil.netlib:netlib-native_ref-win-x86_64
-  com.github.fommil.netlib:netlib-native_ref-win-i686
-  com.github.fommil.netlib:netlib-native_ref-linux-armhf
-  com.github.fommil.netlib:netlib-native_system-osx-x86_64
-  com.github.fommil.netlib:netlib-native_system-linux-x86_64
-  com.github.fommil.netlib:netlib-native_system-linux-i686
-  com.github.fommil.netlib:netlib-native_system-linux-armhf
-  com.github.fommil.netlib:netlib-native_system-win-x86_64
-  com.github.fommil.netlib:netlib-native_system-win-i686
+  com.github.fommil.netlib:netlib-native_ref-osx-x86_64:jar:natives:1.1
+  com.github.fommil.netlib:netlib-native_ref-linux-x86_64:jar:natives:1.1
+  com.github.fommil.netlib:netlib-native_ref-linux-i686:jar:natives:1.1
+  com.github.fommil.netlib:netlib-native_ref-win-x86_64:jar:natives:1.1
+  com.github.fommil.netlib:netlib-native_ref-win-i686:jar:natives:1.1
+  com.github.fommil.netlib:netlib-native_ref-linux-armhf:jar:natives:1.1
+  com.github.fommil.netlib:netlib-native_system-osx-x86_64:jar:natives:1.1
+  com.github.fommil.netlib:netlib-native_system-linux-x86_64:jar:natives:1.1
+  com.github.fommil.netlib:netlib-native_system-linux-i686:jar:natives:1.1
+  com.github.fommil.netlib:netlib-native_system-linux-armhf:jar:natives:1.1
+  com.github.fommil.netlib:netlib-native_system-win-x86_64:jar:natives:1.1
+  com.github.fommil.netlib:netlib-native_system-win-i686:jar:natives:1.1
 level 4
-  com.github.fommil.netlib:all
+  com.github.fommil.netlib:all:pom:1.1.2
 ```
 
 Note that only artifacts, whose Maven coordinates start with `com.githib.fommil` are included via the `inTree()` predicate.
