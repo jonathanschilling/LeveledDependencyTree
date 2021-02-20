@@ -157,33 +157,41 @@ public class LeveledDependencyTree {
 	 * @return a String containing the dot graph in textual form
 	 */
 	public static String ldt2dot(Map<Integer, List<HasDependencies>> ldt, String graphName) {
-		// collect all nodes to assign unique IDs (index in repository)
-		List<HasDependencies> repository = new LinkedList<>();
-		for (Integer level : ldt.keySet()) {
-			repository.addAll(ldt.get(level));
-		}
 
 		String dotGraph = "";
 
 		// header
-		dotGraph += "digraph " + graphName + " {\n  graph [rankdir=LR]\n";
+		dotGraph += "digraph " + graphName + " {\n  graph [rankdir=LR];\n";
 
-		// print levels
+		// collect all nodes to assign unique IDs (index in repository)
+		List<HasDependencies> repository = new LinkedList<>();
 		for (Integer level : ldt.keySet()) {
 			List<HasDependencies> levelNodes = ldt.get(level);
-
-			for (HasDependencies node : levelNodes) {
+			
+			for (HasDependencies node: levelNodes) {
+				// register node in repository
+				repository.add(node);
+				
 				String nodeName = node.toString();
-				int nodeId = repository.indexOf(node);
+				int nodeId = repository.size()-1;
 
 				// node declaration with label
 				dotGraph += "  " + nodeId + " [label=\"" + nodeName + "\"];\n";
+			}
+		}
 
+		// declare dependencies among nodes for levels
+		for (Integer level : ldt.keySet()) {
+			List<HasDependencies> levelNodes = ldt.get(level);
+
+			// all nodes on current level
+			for (HasDependencies node : levelNodes) {
+				int nodeId = repository.indexOf(node);
+				
 				// dependencies
 				dotGraph += "  " + nodeId + " -> {";
 				for (HasDependencies dep : node.getDependencies()) {
 					int depId = repository.indexOf(dep);
-
 					dotGraph += " " + depId;
 				}
 				dotGraph += "};\n";

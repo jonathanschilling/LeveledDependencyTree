@@ -191,7 +191,8 @@ public class MavenExample {
 			}
 		}
 		
-		System.out.println("\n\n");
+		System.out.println("\n### dot graph ###\n");
+
 		
 		System.out.println(LeveledDependencyTree.ldt2dot(leveledDepTree));
 	}
