@@ -49,14 +49,14 @@ public class LeveledDependencyTree {
 					// check if all in-tree dependencies are in previous levels
 					boolean allInTreeDepsInPreviousLevels = true;
 					for (HasDependencies dep : fullId.getDependencies()) {
-						if (dep.inTree()) {
-							boolean inPreviousLevels = false;
-							for (List<HasDependencies> level : levels.values()) {
-								inPreviousLevels |= level.contains(dep);
-							}
-
-							allInTreeDepsInPreviousLevels &= inPreviousLevels;
+						// if (dep.inTree()) {
+						boolean inPreviousLevels = false;
+						for (List<HasDependencies> level : levels.values()) {
+							inPreviousLevels |= level.contains(dep);
 						}
+
+						allInTreeDepsInPreviousLevels &= inPreviousLevels;
+						// }
 					}
 
 					if (_debug && allInTreeDepsInPreviousLevels) {
@@ -74,7 +74,7 @@ public class LeveledDependencyTree {
 			}
 
 			// only put into list of levels after all artifacts have been checked!
-			levels.put(levels.size() + 1, targetCurrentLevel);
+			levels.put(levels.size(), targetCurrentLevel);
 		}
 
 		return levels;
@@ -83,26 +83,26 @@ public class LeveledDependencyTree {
 	/**
 	 * A recursive algorithm to build a leveled dependency tree.
 	 * 
-	 * @param dependencies a flat list of objects depending on another
+	 * @param artifacts a flat list of objects depending on another
 	 * @return Map<level, List<object in level>> leveled dependency tree
 	 * @author Original implementation by Udo Hoefel (udo@hoefel.eu)
 	 */
-	public static Map<Integer, List<HasDependencies>> getDependencyTreeRecursive(List<HasDependencies> dependencies) {
+	public static Map<Integer, List<HasDependencies>> getDependencyTreeRecursive(List<HasDependencies> artifacts) {
 		Map<Integer, List<HasDependencies>> ret = new HashMap<>();
 
-		for (HasDependencies dependency : dependencies) {
+		for (HasDependencies artifact : artifacts) {
 
 			if (_debug) {
-				System.out.print("checking level of " + dependency + "... ");
+				System.out.print("checking level of " + artifact + "... ");
 			}
-			int level = determineLevel(dependency, dependencies);
+			int level = determineLevel(artifact, artifacts);
 			if (_debug) {
 				System.out.println(" => found " + level + ".");
 			}
 
 			ret.putIfAbsent(level, new LinkedList<>());
 
-			ret.get(level).add(dependency);
+			ret.get(level).add(artifact);
 		}
 
 		return ret;
@@ -118,7 +118,7 @@ public class LeveledDependencyTree {
 	 * @author Original implementation by Udo Hoefel (udo@hoefel.eu)
 	 */
 	private static int determineLevel(HasDependencies query, List<HasDependencies> dependencies) {
-		return determineLevel(query, dependencies, 0);
+		return determineLevel(query, dependencies, -1);
 	}
 
 	/**
@@ -127,23 +127,16 @@ public class LeveledDependencyTree {
 	 * 
 	 * @param query        depending object
 	 * @param dependencies list of objects depending on another
-	 * @param startlevel  
+	 * @param startlevel   level which query object is compared against
 	 * @return the level of the object to query (starting at 1 for the root)
 	 * @author Original implementation by Udo Hoefel (udo@hoefel.eu)
 	 */
 	private static int determineLevel(HasDependencies query, List<HasDependencies> dependencies, int startlevel) {
-		int idxOfQuery = dependencies.indexOf(query);
-		if (idxOfQuery != -1) {
-			HasDependencies dep = dependencies.get(idxOfQuery);
-			int level = startlevel + 1;
-			for (HasDependencies deps : dep.getDependencies()) {
-				level = Math.max(level, determineLevel(deps, dependencies, startlevel + 1));
-			}
-			return level;
-		} else if (_debug) {
-			System.out.println("not found in tree: "+query);
+		int level = startlevel + 1;
+		for (HasDependencies deps : query.getDependencies()) {
+			level = Math.max(level, determineLevel(deps, dependencies, startlevel + 1));
 		}
-		return startlevel;
+		return level;
 	}
 
 }

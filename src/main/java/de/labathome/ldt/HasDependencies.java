@@ -19,13 +19,4 @@ public interface HasDependencies {
 	 * @return a list of objects that this object depends on
 	 */
 	public List<HasDependencies> getDependencies();
-
-	/**
-	 * Check if the given object should be considered in-tree or if it should be
-	 * ignored.
-	 * 
-	 * @return true if the object should be considered in the dependency tree; false
-	 *         if it should be ignored.
-	 */
-	public boolean inTree();
 }
