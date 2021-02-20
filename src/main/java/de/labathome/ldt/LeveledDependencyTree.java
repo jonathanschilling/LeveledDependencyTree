@@ -139,4 +139,61 @@ public class LeveledDependencyTree {
 		return level;
 	}
 
+	/**
+	 * Generate a GraphViz dot graph from a leveled dependency tree.
+	 * 
+	 * @param ldt a leveled dependency tree that a dot graph should be made of
+	 * @return a String containing the dot graph in textual form
+	 */
+	public static String ldt2dot(Map<Integer, List<HasDependencies>> ldt) {
+		return ldt2dot(ldt, "LDT");
+	}
+
+	/**
+	 * Generate a GraphViz dot graph from a leveled dependency tree.
+	 * 
+	 * @param ldt       a leveled dependency tree that a dot graph should be made of
+	 * @param graphName name of the dot graph to generate; defaults to "LDT"
+	 * @return a String containing the dot graph in textual form
+	 */
+	public static String ldt2dot(Map<Integer, List<HasDependencies>> ldt, String graphName) {
+		// collect all nodes to assign unique IDs (index in repository)
+		List<HasDependencies> repository = new LinkedList<>();
+		for (Integer level : ldt.keySet()) {
+			repository.addAll(ldt.get(level));
+		}
+
+		String dotGraph = "";
+
+		// header
+		dotGraph += "digraph " + graphName + " {\n  graph [rankdir=LR]\n";
+
+		// print levels
+		for (Integer level : ldt.keySet()) {
+			List<HasDependencies> levelNodes = ldt.get(level);
+
+			for (HasDependencies node : levelNodes) {
+				String nodeName = node.toString();
+				int nodeId = repository.indexOf(node);
+
+				// node declaration with label
+				dotGraph += "  " + nodeId + " [label=\"" + nodeName + "\"];\n";
+
+				// dependencies
+				dotGraph += "  " + nodeId + " -> {";
+				for (HasDependencies dep : node.getDependencies()) {
+					int depId = repository.indexOf(dep);
+
+					dotGraph += " " + depId;
+				}
+				dotGraph += "};\n";
+			}
+		}
+
+		// footer
+		dotGraph += "}\n";
+
+		return dotGraph;
+	}
+
 }

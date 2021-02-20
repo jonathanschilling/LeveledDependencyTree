@@ -32,12 +32,14 @@ public class MavenExample {
 
 		private List<HasDependencies> repository;
 		private int id;
+		private String name;
 		private int[] dependencies;
 
-		public MavenArtifact(List<HasDependencies> repository) {
+		public MavenArtifact(List<HasDependencies> repository, String name) {
 			this.repository = repository;
 			this.repository.add(this);
 			this.id = this.repository.size() - 1;
+			this.name = name;
 		}
 
 		public void setDeps(int[] dependencies) {
@@ -61,6 +63,11 @@ public class MavenExample {
 
 		public int getId() {
 			return id;
+		}
+		
+		@Override
+		public String toString() {
+			return name;
 		}
 	}
 
@@ -125,7 +132,7 @@ public class MavenExample {
 					current = (MavenArtifact) repository.get(idxInRepo);
 				} else {
 					artifactRepository.add(currentArtifact);
-					current = new MavenArtifact(repository);
+					current = new MavenArtifact(repository, currentArtifact.getArtifactId());
 					System.out.println("  put into repo: id=" + current.getId());
 				}
 
@@ -142,7 +149,7 @@ public class MavenExample {
 						foundInRepo = true;
 					} else {
 						artifactRepository.add(depArtifact);
-						MavenArtifact dep = new MavenArtifact(repository); // register in repository
+						MavenArtifact dep = new MavenArtifact(repository, depArtifact.getArtifactId()); // register in repository
 						depInRepo = dep.getId();
 						System.out.println("  dep not in repo: " + depArtifact + " => registered as id=" + depInRepo);
 					}
@@ -183,6 +190,10 @@ public class MavenExample {
 				System.out.println("  " + artifactRepository.get(((MavenArtifact) dep).getId()));
 			}
 		}
+		
+		System.out.println("\n\n");
+		
+		System.out.println(LeveledDependencyTree.ldt2dot(leveledDepTree));
 	}
 
 }
