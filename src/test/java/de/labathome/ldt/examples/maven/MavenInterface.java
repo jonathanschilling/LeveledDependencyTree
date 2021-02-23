@@ -23,8 +23,7 @@ import org.eclipse.aether.resolution.ArtifactResolutionException;
  * dependencies from Maven Central.
  * 
  * @author Jonathan Schilling (jonathan.schilling@mail.de)
- * @author Original Implementation by Jakob Svensson and Sehyun Kwak.
- */
+*/
 public class MavenInterface {
 
 	public static final File DEFAULT_MAVEN_HOME = new File(System.getProperty("user.home"), ".m2");
