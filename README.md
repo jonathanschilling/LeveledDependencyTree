@@ -74,5 +74,14 @@ Splitting this project up into seveval subproject would allow more fine-grained 
 and is [actually considered by the project team](https://www.web3d.org/wiki/index.php/Xj3D_Evolution#Maven).
 Using a leveled dependecy tree, the Xj3D classes could be split up into several Maven artifacts in an orderly manner.
 
+## Availability
+This project is available on Maven Central with the following Maven coordinates:
 
+```xml
+<dependency>
+  <groupId>de.labathome</groupId>
+	<artifactId>LeveledDependencyTree</artifactId>
+	<version>1.0.0</version>
+</dependency>
+```
 
