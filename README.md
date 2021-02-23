@@ -79,7 +79,7 @@ This project is available on Maven Central with the following Maven coordinates:
 
 ```xml
 <dependency>
-  <groupId>de.labathome</groupId>
+	<groupId>de.labathome</groupId>
 	<artifactId>LeveledDependencyTree</artifactId>
 	<version>1.0.0</version>
 </dependency>
